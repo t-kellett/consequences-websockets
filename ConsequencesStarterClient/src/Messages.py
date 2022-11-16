@@ -11,4 +11,4 @@ class InboundMessage:
     @property
     def question(self):
         if "Question" in self.json:
-            return self.json["Players"]
+            return self.json["Question"]

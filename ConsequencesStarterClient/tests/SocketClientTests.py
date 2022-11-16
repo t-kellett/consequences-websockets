@@ -48,3 +48,19 @@ def test_server_returns_list_of_players_added_to_room(socket_client):
 
     # assert
     assert response.players == ["Tom", "Jerry"]
+
+
+def test_server_returns_question_when_room_created(socket_client):
+    # arrange
+    socket_client.receive()
+    socket_client.send(
+        {"Name": "Tom",
+         "Name": "Jerry",
+         "Room": "101"
+         })
+
+    # act
+    response = socket_client.receive()
+
+    # assert
+    assert response.question == "Please enter an adjective, followed by a person's name"
