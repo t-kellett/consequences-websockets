@@ -1,7 +1,13 @@
+from attr import dataclass
+
+
+@dataclass
 class InboundMessage:
-    def __init__(self, json):
-        self.json = json
-        self.message = json["Message"]
+    json: dict
+
+    @property
+    def message(self):
+        return self.json["Message"]
 
     @property
     def players(self) -> list:

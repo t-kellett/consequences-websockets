@@ -37,6 +37,7 @@ def test_full_run_of_consequences(socket_client):
         "Answer": "Tom hit the mousetrap and caught his foot in it"
     })
     response = socket_client.receive()
+    second_game = socket_client.receive()
 
     # assert
     assert response.results == ['Little Jerry met Big Tom at the mousetrap to to fight. Jerry Tom swung his comedy hammer, whilst Tom Jerry ran around in circles. The consequence of their actions was Tom hit the mousetrap and caught his foot in it.']
