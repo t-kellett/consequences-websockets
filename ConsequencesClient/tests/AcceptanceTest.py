@@ -1,4 +1,4 @@
-def test_full_run_of_consequence(socket_client):
+def test_full_run_of_consequences(socket_client):
     # arrange
     socket_client.receive()
     socket_client.send(
