@@ -1,16 +1,3 @@
-import pytest
-
-from SocketClient import SocketClient
-
-
-@pytest.fixture()
-def socket_client():
-    client = SocketClient("ws://51.141.52.52:1234")
-    client.send({"Hello": "Hello"})
-
-    return client
-
-
 def test_connect_to_server(socket_client):
     # act
     response = socket_client.receive()
@@ -64,3 +51,23 @@ def test_server_returns_question_when_room_created(socket_client):
 
     # assert
     assert response.question == "Please enter an adjective, followed by a person's name"
+
+
+def test_server_accepts_answer_and_returns_next_question(socket_client):
+    # arrange
+    socket_client.receive()
+    socket_client.send(
+        {"Name": "Tom",
+         "Name": "Jerry",
+         "Room": "102"  # different room as tests run too quickly
+         })
+
+    # act
+    socket_client.receive()
+    socket_client.send({
+        "Answer": "Little Jerry"
+    })
+    response = socket_client.receive()
+
+    # assert
+    assert response.question == "Please enter another adjective, followed by a different person's name"
