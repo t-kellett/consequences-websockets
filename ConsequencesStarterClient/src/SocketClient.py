@@ -19,8 +19,7 @@ class SocketClient:
     def receive(self) -> InboundMessage:
         json_message = self.ws.recv()
         json_obj = json.loads(json_message)
-        message_obj = InboundMessage(message=json_obj["Message"])
-        return message_obj
+        return InboundMessage(json=json_obj)
 
     def send(self, message):
         json_message = json.dumps(message)
